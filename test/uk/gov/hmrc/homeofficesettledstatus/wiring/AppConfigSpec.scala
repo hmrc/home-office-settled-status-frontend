@@ -16,9 +16,7 @@
 
 package uk.gov.hmrc.homeofficesettledstatus.wiring
 
-import com.google.inject.ImplementedBy
 import com.typesafe.config.ConfigFactory
-import javax.inject.Inject
 import play.api.{Configuration, Mode}
 import uk.gov.hmrc.play.bootstrap.config.{RunMode, ServicesConfig}
 import uk.gov.hmrc.play.test.UnitSpec
@@ -42,29 +40,32 @@ class AppConfigSpec extends UnitSpec {
     val testConfig = Configuration(ConfigFactory.parseString(testConfigString))
     val testRunMode = new RunMode(testConfig, Mode.Dev)
     val testServicesConfig: ServicesConfig = new ServicesConfig(testConfig, testRunMode)
-    val x = new AppConfigImpl(testServicesConfig)
+    val testAppConfig = new AppConfigImpl(testServicesConfig)
 
     "retrieve the name of the app from the service configuration and store it as appName" in {
 
-      x.appName shouldBe "Bonkers"
+      testAppConfig.appName shouldBe "Bonkers"
     }
 
     "have correct auth URL" in {
 
-      x.authBaseUrl shouldBe "http://localhost:8500"
+      testAppConfig.authBaseUrl shouldBe "http://localhost:8500"
     }
 
     "have correct proxy URL" in {
 
-      x.homeOfficeSettledStatusProxyBaseUrl shouldBe "http://localhost:9388"
+      testAppConfig.homeOfficeSettledStatusProxyBaseUrl shouldBe "http://localhost:9388"
     }
 
     "have the correct mongo expiry time" in {
-      x.mongoSessionExpiryTime shouldBe 2
+
+      testAppConfig.mongoSessionExpiryTime shouldBe 2
     }
 
     "have the correct information if this is an authorised stride user" in {
-      x.authorisedStrideGroup shouldBe "Yes"
+
+      testAppConfig.authorisedStrideGroup shouldBe "Yes"
     }
+
   }
 }
