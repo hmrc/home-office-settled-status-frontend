@@ -47,6 +47,7 @@ lookup.familyName.label=Family name
 lookup.familyName.ariaDescribedByError=family-name
 lookup.dateOfBirth.label=Date of birth
 lookup.dateOfBirth.hint=For example, 31 3 1980
+lookup.inputMode=numeric
 
 # Status page
 status-found.title=Lookup results
