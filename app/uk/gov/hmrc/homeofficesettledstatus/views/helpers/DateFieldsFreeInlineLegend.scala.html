@@ -30,19 +30,17 @@
     <fieldset class="form-date" id="@fieldName">
 
         <legend class="@args.toMap.get('_legendClass).map { legendClass => @legendClass}">
-            <span class="@args.toMap.get('_legendSpanClass).map { legendSpanClass => @legendSpanClass}">
-                @args.toMap.get('_legend).map { legend => @legend}
-            </span>
-            @args.toMap.get('_inputHint).map { hint =>
-                <span class="form-hint">@hint</span>
-            }
-            @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">
-                @args.toMap.get('_errorPrefix).map { errorPrefix =>
-                    <span class="visually-hidden">@errorPrefix </span>
-                }
-                @messages(error.message)
-            </span>}
+            @args.toMap.get('_legend).map { legend => @legend}
         </legend>
+        @args.toMap.get('_inputHint).map { hint =>
+            <span class="form-hint">@hint</span>
+        }
+        @formItem.errors.filter(error => fieldNames.contains(error.key)).map { error => <span class="error-notification">
+            @args.toMap.get('_errorPrefix).map { errorPrefix =>
+                <span class="visually-hidden">@errorPrefix </span>
+            }
+            @messages(error.message)
+        </span>}
 
         @input(
             formItem(s"${fieldName}.day"),
