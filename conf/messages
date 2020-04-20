@@ -50,7 +50,7 @@ lookup.dateOfBirth.hint=For example, 31 3 1980
 lookup.inputMode=numeric
 
 # Status page
-status-found.title=Lookup results
+status-found.title=Applicant
 status-found.status=Status
 status-found.startDate=Start date
 status-found.expiryDate=Expiry date
