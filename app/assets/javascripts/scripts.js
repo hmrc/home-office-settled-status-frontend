@@ -1,3 +1,5 @@
+GOVUK.shimLinksWithButtonRole.init()
+
 $(function() {
 
     //Accessibility
