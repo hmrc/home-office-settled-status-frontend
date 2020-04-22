@@ -15,6 +15,13 @@ $(function() {
         });
     });
 
+    //======================================================
+    // Move immediate focus to any error summary
+    //======================================================
+    if ($('.error-summary a').length > 0) {
+        $('.error-summary').focus();
+    }
+
     //Add aria-hidden to hidden inputs
     $('[type="hidden"]').attr("aria-hidden", true);
 
