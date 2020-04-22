@@ -51,6 +51,7 @@ lookup.familyName.ariaDescribedByError=family-name
 lookup.dateOfBirth.label=Date of birth
 lookup.dateOfBirth.hint=For example, 31 3 1980
 lookup.inputMode=numeric
+lookup.hintID=dob-hint
 
 # Status page
 status-found.title=Applicant
