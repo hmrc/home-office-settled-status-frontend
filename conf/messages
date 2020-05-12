@@ -84,5 +84,8 @@ global.error.500.heading=Sorry, there is a problem with the service
 global.error.500.message=Try again later.
 
 # Shuttering
-shuttering.title=Service unavailable
 shuttering.heading=Sorry, the service is unavailable
+shuttering.title=Service unavailable
+
+# Accessibility
+accessibility.title=Accessibility statement for check settled status
