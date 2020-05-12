@@ -43,10 +43,7 @@ class ErrorHandler @Inject()(
     if (env.mode.equals(Mode.Test)) false
     else config.get[String]("run.mode").forall(Mode.Dev.toString.equals)
 
-  override def onClientError(
-    request: RequestHeader,
-    statusCode: Int,
-    message: String): Future[Result] = {
+  override def onClientError(request: RequestHeader, statusCode: Int, message: String): Future[Result] = {
     auditClientError(request, statusCode, message)
     super.onClientError(request, statusCode, message)
   }
@@ -91,8 +88,7 @@ trait ErrorAuditing extends HttpAuditEvent {
   private val notFoundError = "Resource Endpoint Not Found"
   private val badRequestError = "Request bad format exception"
 
-  def auditServerError(request: RequestHeader, ex: Throwable)(
-    implicit ec: ExecutionContext): Unit = {
+  def auditServerError(request: RequestHeader, ex: Throwable)(implicit ec: ExecutionContext): Unit = {
     val eventType = ex match {
       case _: NotFoundException     => ResourceNotFound
       case _: JsValidationException => ServerValidationError
@@ -103,11 +99,7 @@ trait ErrorAuditing extends HttpAuditEvent {
       case _                    => unexpectedError
     }
     auditConnector.sendEvent(
-      dataEvent(
-        eventType,
-        transactionName,
-        request,
-        Map(TransactionFailureReason -> ex.getMessage))(
+      dataEvent(eventType, transactionName, request, Map(TransactionFailureReason -> ex.getMessage))(
         HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))))
   }
 
@@ -117,19 +109,11 @@ trait ErrorAuditing extends HttpAuditEvent {
     statusCode match {
       case NOT_FOUND =>
         auditConnector.sendEvent(
-          dataEvent(
-            ResourceNotFound,
-            notFoundError,
-            request,
-            Map(TransactionFailureReason -> message))(
+          dataEvent(ResourceNotFound, notFoundError, request, Map(TransactionFailureReason -> message))(
             HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))))
       case BAD_REQUEST =>
         auditConnector.sendEvent(
-          dataEvent(
-            ServerValidationError,
-            badRequestError,
-            request,
-            Map(TransactionFailureReason -> message))(
+          dataEvent(ServerValidationError, badRequestError, request, Map(TransactionFailureReason -> message))(
             HeaderCarrierConverter.fromHeadersAndSession(request.headers, Some(request.session))))
       case _ =>
     }
