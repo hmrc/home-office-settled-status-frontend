@@ -18,6 +18,7 @@ package uk.gov.hmrc.homeofficesettledstatus.controllers
 
 import play.api.data.FormError
 import uk.gov.hmrc.domain.Nino
+import uk.gov.hmrc.homeofficesettledstatus.controllers.FormFieldMappings.maxNameLen
 import uk.gov.hmrc.homeofficesettledstatus.models.StatusCheckByNinoRequest
 import uk.gov.hmrc.play.test.UnitSpec
 
@@ -61,7 +62,7 @@ class StatusCheckByNinoRequestFormSpec extends UnitSpec {
     "report an error when givenName is missing" in {
       val form = HomeOfficeSettledStatusFrontendController.StatusCheckByNinoRequestForm
       val input = formInput.updated("givenName", "")
-      form.bind(input).errors shouldBe List(FormError("givenName", "error.givenName.required"))
+      form.bind(input).errors shouldBe List(FormError("givenName", "error.givenName.required", List(maxNameLen)))
     }
 
     "report an error when givenName is invalid" in {
@@ -73,7 +74,7 @@ class StatusCheckByNinoRequestFormSpec extends UnitSpec {
     "report an error when familyName is missing" in {
       val form = HomeOfficeSettledStatusFrontendController.StatusCheckByNinoRequestForm
       val input = formInput.updated("familyName", "")
-      form.bind(input).errors shouldBe List(FormError("familyName", "error.familyName.required"))
+      form.bind(input).errors shouldBe List(FormError("familyName", "error.familyName.required", List(maxNameLen)))
     }
 
     "report an error when familyName is invalid" in {
