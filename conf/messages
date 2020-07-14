@@ -21,9 +21,9 @@ error.day.invalid-format=Enter a day of birth
 error.month.invalid-format=Enter a month of birth
 error.nino.required=Enter National Insurance number in the correct format
 error.nino.invalid-format=Invalid National Insurance number
-error.familyName.required=Enter surname, up to {0} letters
+error.familyName.required=Enter surname
 error.familyName.invalid-format=Invalid surname
-error.givenName.required=Enter first name, up to {0} letters
+error.givenName.required=Enter first name
 error.givenName.invalid-format=Invalid first name
 
 # Service specific messages

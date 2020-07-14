@@ -57,6 +57,6 @@ object FormFieldMappings {
     Constraint[String]("constraint.required") { s =>
       Option(s)
         .filter(!_.trim.isEmpty)
-        .fold[ValidationResult](Invalid(ValidationError(s"error.$fieldName.required", maxNameLen)))(_ => Valid)
+        .fold[ValidationResult](Invalid(ValidationError(s"error.$fieldName.required")))(_ => Valid)
     }
 }
