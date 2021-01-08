@@ -21,7 +21,9 @@ import play.api.i18n.Messages
 import uk.gov.hmrc.homeofficesettledstatus.support.NonAuthPageISpec
 import uk.gov.hmrc.homeofficesettledstatus.views.html.{error_template => ShutteringPage}
 
-class ShutteringFilterISpec extends NonAuthPageISpec("isShuttered" -> true) {
+class ShutteringFilterISpec extends NonAuthPageISpec(
+  "isShuttered" -> true,
+  "accessibility-statement.service-path" -> "/check-settled-status") {
 
   "The shuttering filter" should {
     "display the shuttering page when the `isShuttered` property is true" in {

@@ -7,6 +7,4 @@ GET         /status-found                @uk.gov.hmrc.homeofficesettledstatus.co
 GET         /status-not-available        @uk.gov.hmrc.homeofficesettledstatus.controllers.HomeOfficeSettledStatusFrontendController.showStatusNotAvailable
 GET         /status-check-failure        @uk.gov.hmrc.homeofficesettledstatus.controllers.HomeOfficeSettledStatusFrontendController.showStatusCheckFailure
 
-GET         /accessibility-statement     @uk.gov.hmrc.homeofficesettledstatus.controllers.AccessibilityStatementController.showPage
-
 GET         /assets/*file                controllers.Assets.at(path="/public", file)

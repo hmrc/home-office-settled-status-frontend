@@ -21,6 +21,7 @@ import org.scalatestplus.mockito.MockitoSugar
 import org.scalatestplus.play.guice.GuiceOneAppPerSuite
 import play.api.Configuration
 import play.api.i18n.{Lang, MessagesImpl}
+import play.api.mvc.RequestHeader
 import play.api.test.FakeRequest
 import play.api.test.Helpers._
 import play.twirl.api.Html
@@ -31,8 +32,7 @@ import uk.gov.hmrc.play.views.html.helpers.ReportAProblemLink
 import uk.gov.hmrc.play.views.html.layouts._
 import views.html.layouts.GovUkTemplate
 
-class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper, layoutComponents: LayoutComponents)
-    extends UnitSpec with GuiceOneAppPerSuite with MockitoSugar {
+class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper) extends UnitSpec with GuiceOneAppPerSuite with MockitoSugar {
 
   implicit val lang: Lang = Lang("eng")
 
@@ -47,7 +47,9 @@ class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper, layoutComponents: LayoutC
         message = message,
         helpdesk = None,
         messages = MessagesImpl(lang, stubMessagesApi()),
-        configuration = app.configuration)
+        configuration = app.configuration,
+        mock[RequestHeader]
+      )
       val content = contentAsString(html)
       content should include(pageTitle)
       content should include(heading)
@@ -55,7 +57,10 @@ class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper, layoutComponents: LayoutC
 
       val html2 =
         new error_template(govUkWrapper)
-          .f(pageTitle, heading, message, None)(MessagesImpl(lang, stubMessagesApi()), app.configuration)
+          .f(pageTitle, heading, message, None)(
+            MessagesImpl(lang, stubMessagesApi()),
+            app.configuration,
+            mock[RequestHeader])
       contentAsString(html2) shouldBe (content)
     }
   }
@@ -145,7 +150,8 @@ class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper, layoutComponents: LayoutC
         scriptElem = Some(Html("My custom script")),
         gaCode = Seq("My custom GA code"),
         messages = MessagesImpl(lang, stubMessagesApi()),
-        configuration = app.configuration
+        configuration = app.configuration,
+        mock[RequestHeader]
       )
 
       val content = contentAsString(html)
@@ -179,7 +185,7 @@ class ViewsSpec @Inject()(govUkWrapper: govuk_wrapper, layoutComponents: LayoutC
         Html("My custom service info content"),
         Some(Html("My custom script")),
         Seq("My custom GA code")
-      )(MessagesImpl(lang, stubMessagesApi()), app.configuration)
+      )(MessagesImpl(lang, stubMessagesApi()), app.configuration, mock[RequestHeader])
       contentAsString(html2) shouldBe (content)
     }
   }

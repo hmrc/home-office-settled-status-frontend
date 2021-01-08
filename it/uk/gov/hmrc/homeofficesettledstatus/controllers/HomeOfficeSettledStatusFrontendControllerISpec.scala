@@ -86,7 +86,6 @@ class HomeOfficeSettledStatusFrontendControllerISpec
         journey.set(StatusCheckByNino(), List(Start))
         givenAuthorisedForStride("TBC", "StrideUserId")
         val result = controller.showStatusCheckByNino(fakeRequest)
-        checkHtmlResultWithBodyText(result, s"<a href='${routes.AccessibilityStatementController.showPage().url}'")
       }
     }
 

@@ -18,7 +18,7 @@
 
 @this(govUKWrapper: govuk_wrapper)
 
-@(pageTitle: String, heading: String, message: String, helpdesk: Option[String] = None)(implicit messages: Messages, configuration: Configuration)
+@(pageTitle: String, heading: String, message: String, helpdesk: Option[String] = None)(implicit messages: Messages, configuration: Configuration, request: RequestHeader)
 
 @contentHeader = {
     <h1 id="title" class="heading-xlarge">@heading</h1>
